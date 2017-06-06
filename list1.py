@@ -21,12 +21,11 @@
 # and last chars of the string are the same.
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
-  # +++your code here+++
-  count = 0
-  for word in words:
-    if len(word)>= 2 and word[0]==word[-1]:
-      count = count +1
-  return count
+  j=0
+  for i in range(len(words)):
+    if len(words[i])>=2 and words[i][0]==words[i][-1]:
+      j+=1
+  return j
 
 
 # B. front_x
@@ -37,16 +36,16 @@ def match_ends(words):
 # Hint: this can be done by making 2 lists and sorting each of them
 # before combining them.
 def front_x(words):
-  # +++your code here+++
-  list1 = []
-  list2 = []
-  for w in words:
-    if w.startswith('x'):
-      list1.append(w)
+  startx = []
+  starta = []
+  for i in range(len(words)):
+    if words[i][0:1]=='x':
+      startx.append(words[i])
     else:
-      list2.append(w)
-  return sorted(list1) + sorted(list2)
-
+      starta.append(words[i])
+  startx.sort()
+  starta.sort()
+  return startx + starta
 
 
 
@@ -56,8 +55,11 @@ def front_x(words):
 # e.g. [(1, 7), (1, 3), (3, 4, 5), (2, 2)] yields
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
+def lastone(a):
+  return a[-1]
+
 def sort_last(tuples):
-  # +++your code here+++
+  return sorted(tuples, key=lastone)
   return
 
 
@@ -78,7 +80,7 @@ def main():
   test(match_ends(['', 'x', 'xy', 'xyx', 'xx']), 2)
   test(match_ends(['aaa', 'be', 'abc', 'hello']), 1)
 
-  
+  print
   print ('front_x')
   test(front_x(['bbb', 'ccc', 'axx', 'xzz', 'xaa']),
        ['xaa', 'xzz', 'axx', 'bbb', 'ccc'])
@@ -88,7 +90,7 @@ def main():
        ['xanadu', 'xyz', 'aardvark', 'apple', 'mix'])
 
        
-  
+  print
   print ('sort_last')
   test(sort_last([(1, 3), (3, 2), (2, 1)]),
        [(2, 1), (3, 2), (1, 3)])
